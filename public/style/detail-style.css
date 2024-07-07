@@ -1,0 +1,45 @@
+body{
+    background-image: url('/images/details-page-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    margin:0;
+}
+
+.images-div{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 10rem;
+}
+
+.images{
+    height: 500px;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.main-heading{
+    /* color: rgba(255, 255, 255, 0.774); */
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 70px;
+    text-decoration: underline;
+}
+
+p{
+    font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 25px;
+}
+
+a:link{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Change this to the color you want */
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Place Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="style/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="loading" id="loading"></div>
+    <h1 class="main-heading">Place Finder</h1>
+    <div class="container my-5 search-box">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control search-bar-input" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-lg" placeholder="Places to go, things to do, hotels..." />
+            <span class="input-group-text search-bar-button" id="inputGroup-sizing-lg">Search</span>
+        </div>
+    </div>
+
+    <div class="container places-container">
+        <% if(locals.content) {%>
+            <% for(let i=0; i<content.length; i++) { %>
+                <% if(i===content.length - 1) { %>
+                    <div class="card col-4 mx-2 my-2">
+                        <img src="<%= images[i] %>" class="card-img-top my-2 px-2" alt="place photo" width="100px"
+                            height="200px">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= content[i].name %>
+                            </h5>
+                            <% if (content[i].address_obj.street1 && content[i].address_obj.street2 &&
+                                content[i].address_obj.city){ %>
+                                <p class="card-text">Address: <%= content[i].address_obj.street1 %>,<%=
+                                            content[i].address_obj.street2 %>,<%= content[i].address_obj.city %>, <%=
+                                                    content[i].address_obj.country %>
+                                </p>
+                                <% } else if (content[i].address_obj.street1 && content[i].address_obj.city) { %>
+                                    <p class="card-text">Address: <%= content[i].address_obj.street1 %>,<%=
+                                                content[i].address_obj.city %>, <%= content[i].address_obj.country %>
+                                    </p>
+                                    <% } else if (content[i].address_obj.street2 && content[i].address_obj.city) { %>
+                                        <p class="card-text">Address: <%= content[i].address_obj.street2 %>,<%=
+                                                    content[i].address_obj.city %>, <%= content[i].address_obj.country
+                                                        %>
+                                        </p>
+                                        <% } else if(content[i].address_obj.city) {%>
+                                            <p class="card-text">Address: <%= content[i].address_obj.city %>, <%=
+                                                        content[i].address_obj.country %>
+                                            </p>
+                                            <% } else{ %>
+                                                <p class="card-text">Address: <%= content[i].address_obj.country %>
+                                                </p>
+                                                <% } %>
+                                                    <a href="" class="btn btn-primary details-page"
+                                                        data="<%= content[i].location_id %>">More Details</a>
+                        </div>
+                    </div>
+                    <%}else{ %>
+                        <% if(i % 3===0) { %>
+                            <div class="row">
+                                <% } %>
+                                    <div class="card col-sm mx-2 my-2" style="width: 18rem;">
+                                        <img src="<%= images[i] %>" class="card-img-top my-2 mr-2" alt="place photo"
+                                            width="200" height="200">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= content[i].name %>
+                                            </h5>
+                                            <% if (content[i].address_obj.country) {%>
+                                                <p class="card-text">
+                                                    <%= content[i].address_obj.country %>
+                                                </p>
+                                                <% } else{%>
+                                                    <p class="card-text"></p>
+                                                    <% } %>
+                                                        <a href="" class="btn btn-primary details-page"
+                                                            data="<%= content[i].location_id %>">More Details</a>
+                                        </div>
+                                    </div>
+                                    <% if((i + 1) % 3===0 || i===content.length - 1) { %>
+                            </div>
+                            <% } %>
+                                <% } %>
+                                    <% } %>
+                                        <% }%>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="scripts/script.js" charset="UTF-8"></script>
+</body>
+
+</html>
